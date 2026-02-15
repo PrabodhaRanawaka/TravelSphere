@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="goToDetail"
     class="bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6"
   >
     <h2 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
@@ -24,6 +25,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import type { Post } from '@/types/post'
 
 interface Props {
@@ -31,10 +33,15 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const router = useRouter()
 
 const truncatedBody = computed(() =>
   props.post.body.length > 120
     ? props.post.body.substring(0, 120) + '...'
     : props.post.body
 )
+
+const goToDetail = () => {
+  router.push(`/post/${props.post.id}`)
+}
 </script>

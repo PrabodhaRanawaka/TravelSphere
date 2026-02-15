@@ -23,5 +23,12 @@ export function usePosts() {
     }
   }
 
-  return { posts, loading, error, fetchPosts }
+  const fetchPostById = async (id: number): Promise<Post> => {
+    const res = await fetch(`https://dummyjson.com/posts/${id}`)
+    if (!res.ok) throw new Error('Failed to fetch post')
+    return await res.json() as Post
+  }
+
+
+  return { posts, loading, error, fetchPosts, fetchPostById }
 }
