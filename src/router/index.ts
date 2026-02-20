@@ -12,6 +12,12 @@ const routes: RouteRecordRaw[] = [
     name: 'post-detail',
     component: () => import('@/views/PostDetailView.vue'),
     props: true
+  },
+
+  {
+  path: '/bookmarks',
+  name: 'bookmarks',
+  component: () => import('@/views/BookmarksView.vue')
   }
 ]
 
