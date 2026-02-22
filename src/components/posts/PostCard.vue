@@ -36,6 +36,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Post } from '@/types/post'
 import { useBookmarkStore } from '@/store/bookmark'
+import { useAuthStore } from '@/store/auth'
 
 interface Props {
   post: Post
@@ -43,6 +44,9 @@ interface Props {
 
 const props = defineProps<Props>()
 const router = useRouter()
+
+const bookmarkStore = useBookmarkStore()
+const authStore = useAuthStore()
 
 const truncatedBody = computed(() =>
   props.post.body.length > 120
@@ -54,18 +58,21 @@ const goToDetail = () => {
   router.push(`/post/${props.post.id}`)
 }
 
-const bookmarkStore = useBookmarkStore()
+const isBookmarked = computed(() =>
+  bookmarkStore.bookmarks.some(p => p.id === props.post.id)
+)
 
 const toggleBookmark = () => {
+  if (!authStore.user) {
+    alert('Please login to bookmark')
+    return
+  }
+
   if (isBookmarked.value) {
     bookmarkStore.removeBookmark(props.post.id)
   } else {
     bookmarkStore.addBookmark(props.post)
   }
 }
-
-const isBookmarked = computed(() =>
-  bookmarkStore.bookmarks.some(p => p.id === props.post.id)
-)
 
 </script>

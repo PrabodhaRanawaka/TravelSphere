@@ -15,3 +15,7 @@ app.mount('#app')
 import { useBookmarkStore } from './store/bookmark'
 const bookmarkStore = useBookmarkStore(pinia)
 bookmarkStore.loadFromLocalStorage()
+
+import { useAuthStore } from '@/store/auth'
+const authStore = useAuthStore()
+authStore.restoreSession()

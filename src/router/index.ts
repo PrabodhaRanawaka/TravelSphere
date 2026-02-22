@@ -15,9 +15,15 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-  path: '/bookmarks',
-  name: 'bookmarks',
-  component: () => import('@/views/BookmarksView.vue')
+    path: '/bookmarks',
+    name: 'bookmarks',
+    component: () => import('@/views/BookmarksView.vue')
+  },
+
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/LoginView.vue')
   }
 ]
 
