@@ -30,10 +30,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
+const route = useRoute()
 const authStore = useAuthStore()
 
 const username = ref('')
@@ -43,8 +44,15 @@ const error = ref<string | null>(null)
 const handleLogin = async () => {
   error.value = null
   try {
-    await authStore.login({ username: username.value, password: password.value })
-    router.push('/')
+    await authStore.login({
+      username: username.value,
+      password: password.value
+    })
+
+    // 👇 Redirect back to original page if exists
+    const redirectPath = (route.query.redirect as string) || '/'
+    router.push(redirectPath)
+
   } catch (err: unknown) {
     if (err instanceof Error) error.value = err.message
   }

@@ -19,3 +19,7 @@ bookmarkStore.loadFromLocalStorage()
 import { useAuthStore } from '@/store/auth'
 const authStore = useAuthStore()
 authStore.restoreSession()
+
+import { useThemeStore } from '@/store/theme'
+const themeStore = useThemeStore()
+themeStore.restoreTheme()

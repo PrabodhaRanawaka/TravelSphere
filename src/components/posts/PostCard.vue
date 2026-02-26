@@ -64,8 +64,10 @@ const isBookmarked = computed(() =>
 
 const toggleBookmark = () => {
   if (!authStore.user) {
+    if (!authStore.user) {
     alert('Please login to bookmark')
     return
+  }
   }
 
   if (isBookmarked.value) {
