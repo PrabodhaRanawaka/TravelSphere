@@ -1,8 +1,10 @@
 <template>
   <div class="p-6 max-w-4xl mx-auto">
 
+    <!-- Loading for post -->
     <LoadingSpinner v-if="loadingPost" />
 
+    <!-- Post Content -->
     <div v-else-if="post">
       <h1 class="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
         {{ post.title }}
@@ -12,16 +14,21 @@
         {{ post.body }}
       </p>
 
-      <div class="flex gap-2 mb-6">
+      <!-- PREMIUM STYLED TAGS -->
+      <div class="flex flex-wrap gap-2 mb-6">
         <span
           v-for="tag in post.tags"
           :key="tag"
-          class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-2 py-1 rounded-full text-xs"
+          class="text-xs font-medium px-3 py-1 rounded-full 
+                 bg-[#CC5500]/15 text-[#CC5500] 
+                 hover:bg-[#CC5500]/25 
+                 transition"
         >
           #{{ tag }}
         </span>
       </div>
 
+      <!-- Comments Section -->
       <h2 class="text-xl font-semibold mb-4">
         Comments ({{ comments.length }})
       </h2>
@@ -45,6 +52,7 @@
 
     </div>
 
+    <!-- Error Handling -->
     <div v-else-if="errorPost" class="text-red-500">
       {{ errorPost }}
     </div>
